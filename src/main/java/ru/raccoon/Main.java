@@ -47,7 +47,6 @@ public class Main {
                     BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); //поток для чтения
 
                     logger.log("Подключился клиент.");
-                    //out.println("Привет, новый клиент, ты в чате");
                     //создадим поток общения с клиентом, в то время как основной поток будет ждать других клиентов
                     new Thread(() -> {
                         while (true) {
@@ -66,7 +65,7 @@ public class Main {
                                 synchronized (printWriterList) {
                                     for (PrintWriter writers :
                                             printWriterList) {
-                                        //если не /exit, то шлём сообщения всем в списке кроме самого себя
+                                        //если не /exit, то шлём сообщения всем потокам-клиентам в списке
                                             writers.println(inMsg);
                                     }
                                 }
